@@ -53,4 +53,7 @@ public class CommandeService {
         commande.setStatut(nouveauStatut);
         return commandeRepository.save(commande);
     }
+    public List<Commande> getCommandesByFournisseur(Long fournisseurId) {
+        return commandeRepository.findByFournisseurId(fournisseurId);
+    }
 }

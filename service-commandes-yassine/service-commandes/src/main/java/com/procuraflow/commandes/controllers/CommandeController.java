@@ -48,4 +48,9 @@ public class CommandeController {
         Commande commandeMaj = commandeService.updateStatutCommande(id, statut);
         return ResponseEntity.ok(commandeMaj);
     }
+    @GetMapping("/fournisseur/{fournisseurId}")
+    public ResponseEntity<List<Commande>> getCommandesByFournisseur(@PathVariable Long fournisseurId) {
+        List<Commande> commandes = commandeService.getCommandesByFournisseur(fournisseurId);
+        return ResponseEntity.ok(commandes);
+    }
 }
