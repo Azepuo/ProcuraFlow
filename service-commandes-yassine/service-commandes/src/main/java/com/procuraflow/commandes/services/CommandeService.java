@@ -2,6 +2,7 @@ package com.procuraflow.commandes.services;
 
 import com.procuraflow.commandes.entities.Commande;
 import com.procuraflow.commandes.entities.LigneCommande;
+import com.procuraflow.commandes.entities.StatutCommande;
 import com.procuraflow.commandes.repositories.CommandeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,5 +45,12 @@ public class CommandeService {
 
     public void supprimerCommande(Long id) {
         commandeRepository.deleteById(id);
+    }
+    public Commande updateStatutCommande(Long id, StatutCommande nouveauStatut) {
+        Commande commande = commandeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Commande non trouvée avec l'id : " + id));
+        
+        commande.setStatut(nouveauStatut);
+        return commandeRepository.save(commande);
     }
 }

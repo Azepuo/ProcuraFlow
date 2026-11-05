@@ -1,6 +1,7 @@
 package com.procuraflow.commandes.controllers;
 
 import com.procuraflow.commandes.entities.Commande;
+import com.procuraflow.commandes.entities.StatutCommande;
 import com.procuraflow.commandes.services.CommandeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -39,5 +40,12 @@ public class CommandeController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
+    }
+    @PutMapping("/{id}/statut")
+    public ResponseEntity<Commande> modifierStatutCommande(
+            @PathVariable Long id, 
+            @RequestParam StatutCommande statut) {
+        Commande commandeMaj = commandeService.updateStatutCommande(id, statut);
+        return ResponseEntity.ok(commandeMaj);
     }
 }
